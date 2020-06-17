@@ -97,6 +97,11 @@ public class PlayerController : MonoBehaviour
         return inventory.IsInventoryFull();
     }
 
+    public List<ItemSO> GetItems()
+    {
+        return inventory.GetItems();
+    }
+
 
     #region Old Commented Code
 

@@ -16,4 +16,14 @@ public class MainSceneManager: MonoBehaviour
     {
         guiManager.ShowPickUpKeyHing(show, inventoryFull);
     }
+
+    public void UpdateInventory()
+    {
+        guiManager.UpdateInventory();
+    }
+
+    public void UpdateInventoryVisibility()
+    {
+
+    }
 }

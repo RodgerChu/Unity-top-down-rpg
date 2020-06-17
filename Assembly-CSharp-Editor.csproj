@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{96F01CA0-97DE-8FA4-329D-33757E0E8D2A}</ProjectGuid>
+    <ProjectGuid>{87224CC0-37B3-B2F4-28CC-1EFE3551B7A5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -66,43 +66,46 @@
     <Compile Include="Assets\Imports\Crafting Mecanim Animation Pack FREE\Elements\Editor\ReviewConfig.cs" />
     <Compile Include="Assets\Imports\Crafting Mecanim Animation Pack FREE\Elements\Editor\ReviewWindowEditor.cs" />
     <Reference Include="UnityEditor.TestRunner">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TestRunner">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Cinemachine">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.cinemachine.editor">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -306,7 +309,7 @@
       <HintPath>/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>/Applications/Unity/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
@@ -671,15 +674,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{8FCABA6A-BA4F-1BB3-7C92-1410FE25BDB3}</Project>
+      <Project>{39F8D77B-7D1F-4407-5F25-01A482C43401}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
     <ProjectReference Include="NavMeshComponentsEditor.csproj">
-      <Project>{14B81E0A-63FB-1547-77E1-1523879458B9}</Project>
+      <Project>{85D61A12-73C4-9C51-F193-FC85B1A603DA}</Project>
       <Name>NavMeshComponentsEditor</Name>
     </ProjectReference>
     <ProjectReference Include="NavMeshComponents.csproj">
-      <Project>{5D003544-4BFD-C485-4435-22384F163AC2}</Project>
+      <Project>{6CC83A86-7F84-2B67-6F51-72807C42A7DD}</Project>
       <Name>NavMeshComponents</Name>
     </ProjectReference>
   </ItemGroup>

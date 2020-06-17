@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{5D003544-4BFD-C485-4435-22384F163AC2}</ProjectGuid>
+    <ProjectGuid>{6CC83A86-7F84-2B67-6F51-72807C42A7DD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>NavMeshComponents</AssemblyName>
@@ -69,10 +69,10 @@
     <Compile Include="Assets\Imports\NavMeshComponents\Scripts\NavMeshSurface.cs" />
     <None Include="Assets\Imports\NavMeshComponents\Scripts\NavMeshComponents.asmdef" />
     <Reference Include="UnityEditor.UI">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

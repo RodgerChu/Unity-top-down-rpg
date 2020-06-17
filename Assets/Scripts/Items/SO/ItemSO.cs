@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ItemParams", menuName = "SO/Item Parameters", order = 1)]
+[CreateAssetMenu(fileName = "ItemParams", menuName = "SO/Item", order = 1)]
 public class ItemSO : ScriptableObject
 {
-    #region Animation
 
-    [SerializeField] private Animator animator;
+    #region Visual
+
+    [SerializeField] private Sprite icon;
+    [SerializeField] private GameObject itemPrefab;
 
     #endregion
 
@@ -62,14 +64,18 @@ public class ItemSO : ScriptableObject
         get { return autoAttack; }
     }
 
+    public Sprite Icon
+    {
+        get { return icon; }
+    }
+
     #endregion
 
     #region Functions (public)
 
     public virtual void Attack()
     {
-        isAttacking = true;
-        animator.SetBool("Attacking", true);
+
     }
 
     public virtual bool CanHarvest(ResourceDepositSO resource)
@@ -92,6 +98,11 @@ public class ItemSO : ScriptableObject
     {
         var distance = Vector3.Distance(currentPosition, enemyPosition);
         return distance < attackRange;
+    }
+
+    public virtual GameObject LoadPrefab()
+    {
+        return Instantiate(itemPrefab);
     }
 
     #endregion

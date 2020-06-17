@@ -6,9 +6,9 @@ public class MainSceneGUIManager : MonoBehaviour
 {
     [Header("GUI elements")]
     public GameObject interactHint;
-
     public GameObject pickUpHint;
     public GameObject inventoryFullMessage;
+    public InventoryGUI inventoryGUI;
 
     private void Awake()
     {
@@ -26,5 +26,15 @@ public class MainSceneGUIManager : MonoBehaviour
     {
         pickUpHint.SetActive(show);
         inventoryFullMessage.SetActive(inventoryFull);
+    }
+
+    public void UpdateInventory()
+    {
+        inventoryGUI.UodateGUI();
+    }
+
+    public void UpdateInventoryVisibility()
+    {
+
     }
 }

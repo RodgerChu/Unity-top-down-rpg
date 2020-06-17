@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{8FCABA6A-BA4F-1BB3-7C92-1410FE25BDB3}</ProjectGuid>
+    <ProjectGuid>{39F8D77B-7D1F-4407-5F25-01A482C43401}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -115,6 +115,8 @@
     <Compile Include="Assets\Scripts\CharacterControllers\CharacterInventory.cs" />
     <Compile Include="Assets\Scripts\CharacterControllers\PlayerController.cs" />
     <Compile Include="Assets\Scripts\CharacterControllers\PlayerStatSystem.cs" />
+    <Compile Include="Assets\Scripts\GUI\InventoryCell.cs" />
+    <Compile Include="Assets\Scripts\GUI\InventoryGUI.cs" />
     <Compile Include="Assets\Scripts\GUI\MainSceneGUIManager.cs" />
     <Compile Include="Assets\Scripts\General\GameManager\GameManager.cs" />
     <Compile Include="Assets\Scripts\General\LootSystem\PickUpManager.cs" />
@@ -135,6 +137,17 @@
     <Compile Include="Assets\Scripts\StateMachine\IdleState.cs" />
     <Compile Include="Assets\Scripts\StateMachine\RunState.cs" />
     <Compile Include="Assets\Scripts\StateMachine\SprintState.cs" />
+    <Compile Include="Assets\UI\BasicUI Metal\Standard Assets\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
+    <Compile Include="Assets\UI\BasicUI Metal\Standard Assets\CrossPlatformInput\Scripts\ButtonHandler.cs" />
+    <Compile Include="Assets\UI\BasicUI Metal\Standard Assets\CrossPlatformInput\Scripts\CrossPlatformInputManager.cs" />
+    <Compile Include="Assets\UI\BasicUI Metal\Standard Assets\CrossPlatformInput\Scripts\InputAxisScrollbar.cs" />
+    <Compile Include="Assets\UI\BasicUI Metal\Standard Assets\CrossPlatformInput\Scripts\Joystick.cs" />
+    <Compile Include="Assets\UI\BasicUI Metal\Standard Assets\CrossPlatformInput\Scripts\MobileControlRig.cs" />
+    <Compile Include="Assets\UI\BasicUI Metal\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\MobileInput.cs" />
+    <Compile Include="Assets\UI\BasicUI Metal\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\StandaloneInput.cs" />
+    <Compile Include="Assets\UI\BasicUI Metal\Standard Assets\CrossPlatformInput\Scripts\TiltInput.cs" />
+    <Compile Include="Assets\UI\BasicUI Metal\Standard Assets\CrossPlatformInput\Scripts\TouchPad.cs" />
+    <Compile Include="Assets\UI\BasicUI Metal\Standard Assets\CrossPlatformInput\Scripts\VirtualInput.cs" />
     <None Include="Assets\Imports\Free_Rocks\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\Imports\Free_Rocks\Standard Assets\Effects\ImageEffects\Shaders\GlobalFog.shader" />
@@ -161,6 +174,7 @@
     <None Include="Assets\Imports\Free_Rocks\Standard Assets\Effects\ImageEffects\Shaders\SSAOShader.shader" />
     <None Include="Assets\Imports\Free_Rocks\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionCurvesSimple.shader" />
     <None Include="Assets\Imports\Free_Rocks\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\Blend.shader" />
+    <None Include="Assets\UI\BasicUI Metal\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Imports\Free_Rocks\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\SSAA.shader" />
     <None Include="Assets\Imports\Free_Rocks\Standard Assets\Effects\ImageEffects\Shaders\SunShaftsComposite.shader" />
     <None Include="Assets\Imports\Free_Rocks\Standard Assets\Effects\ImageEffects\Shaders\ConvertDepth.shader" />
@@ -248,37 +262,40 @@
     <None Include="Assets\Imports\Free_Rocks\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\TiltShiftHdrLensBlur.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Cinemachine">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.cinemachine.editor">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>/Users/vladislav/UnityProj/colony_namagement/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>/Users/vladislav/UnityProj/Unity-top-down-rpg/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -820,11 +837,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="NavMeshComponentsEditor.csproj">
-      <Project>{14B81E0A-63FB-1547-77E1-1523879458B9}</Project>
+      <Project>{85D61A12-73C4-9C51-F193-FC85B1A603DA}</Project>
       <Name>NavMeshComponentsEditor</Name>
     </ProjectReference>
     <ProjectReference Include="NavMeshComponents.csproj">
-      <Project>{5D003544-4BFD-C485-4435-22384F163AC2}</Project>
+      <Project>{6CC83A86-7F84-2B67-6F51-72807C42A7DD}</Project>
       <Name>NavMeshComponents</Name>
     </ProjectReference>
   </ItemGroup>

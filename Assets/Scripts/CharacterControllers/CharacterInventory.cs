@@ -41,4 +41,9 @@ public class CharacterInventory : MonoBehaviour
     {
         return items.Count >= inventoryTotalMaxSize;
     }
+
+    public List<ItemSO> GetItems()
+    {
+        return items;
+    }
 }
