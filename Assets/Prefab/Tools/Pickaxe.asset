@@ -18,11 +18,13 @@ MonoBehaviour:
   itemName: 
   itemType: 1
   itemSubtype: 3
+  itemPosition: 5
   attackPower: 0
+  armor: 0
   attackSpeed: 0
   attackRange: 0
   resourceHarvestPenalty: 0
   autoAttack: 0
-  miningPower: 0
-  axePower: 0
+  miningPower: 70
+  axePower: 10
   fishingPower: 0

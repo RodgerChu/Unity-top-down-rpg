@@ -1,20 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryGUI : MonoBehaviour
 {
     public Transform cellParent;
+    public Button button;
     private InventoryCell[] cells;
 
     private void Awake()
     {
         gameObject.transform.localScale = Vector3.zero;
+        button.onClick.AddListener(UpdateInventoryVisibility);
     }
 
     private void Start()
     {
         cells = cellParent.GetComponentsInChildren<InventoryCell>();
+        var player = GameManager.Instance.currentScene.player;
+        player.equipment.ItemEquipedEvent += (item) => UpdateGUI();
+        player.equipment.ItemUnequipedEvent += (item) => UpdateGUI();
     }
 
     private void Update()
@@ -25,7 +31,7 @@ public class InventoryGUI : MonoBehaviour
         }
     }
 
-    public void UodateGUI()
+    public void UpdateGUI()
     {
         var player = GameManager.Instance.currentScene.player;
         var items = player.GetItems();
@@ -47,6 +53,7 @@ public class InventoryGUI : MonoBehaviour
 
     public void UpdateInventoryVisibility()
     {
+        Debug.Log("Update called");
         gameObject.transform.localScale = gameObject.transform.localScale == Vector3.zero ? new Vector3(1, 1, 1) : Vector3.zero;
     }
 }

@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 8912054338506393606}
   - component: {fileID: 8912054338506393625}
   - component: {fileID: 8912054338506393628}
+  - component: {fileID: -1761944960547446302}
+  - component: {fileID: -181672982389550194}
   m_Layer: 9
   m_Name: VillagerPickaxe
   m_TagString: Pickaxe
@@ -138,3 +140,29 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.93
   m_Center: {x: -0.000000029802322, y: 0.15692745, z: 0.00000005587937}
+--- !u!114 &-1761944960547446302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8912054338100482331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e88090808ea14003b8bd5eff5581d10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemStats: {fileID: 11400000, guid: 0bad0214a7fab468aa6c65949e5abf42, type: 2}
+--- !u!114 &-181672982389550194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8912054338100482331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eca3687d285984c71a44941f5e8532e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 0bad0214a7fab468aa6c65949e5abf42, type: 2}

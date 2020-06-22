@@ -25,4 +25,12 @@
 
     #endregion
 
+    #region Armor types
+
+    HELMET,
+    BODY,
+    LEGS
+
+    #endregion
+
 }

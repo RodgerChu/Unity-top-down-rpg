@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b84ee850199abbc4d92cd6a0d0c4a1ca, type: 3}
-  m_Name: RatingSetup
+  m_Script: {fileID: 11500000, guid: ffea483de273f4e92af6b508fbf0d176, type: 3}
+  m_Name: ResourceDeposit
   m_EditorClassIdentifier: 
-  active: 1
-  counter: 6
-  lastCheck: 442453.1165613822
+  harvestDifficulty: 0
+  resourceType: 0

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ItemParams", menuName = "SO/Item", order = 1)]
 public class ItemSO : ScriptableObject
 {
 
@@ -19,10 +18,12 @@ public class ItemSO : ScriptableObject
     [SerializeField] private string itemName;
     [SerializeField] private ItemType itemType;
     [SerializeField] private ItemSubtype itemSubtype;
+    [SerializeField] private ItemPositions itemPosition;
     [Space]
 
     [Header("Params")]
     [SerializeField] private int attackPower;
+    [SerializeField] private int armor;
     [Tooltip("Number of attack per second")]
     [SerializeField] private int attackSpeed;
     [SerializeField] private int attackRange;
@@ -59,6 +60,11 @@ public class ItemSO : ScriptableObject
         get { return itemSubtype; }
     }
 
+    public ItemPositions ItemPosition
+    {
+        get { return itemPosition; }
+    }
+
     public bool AutoAttack
     {
         get { return autoAttack; }
@@ -69,40 +75,34 @@ public class ItemSO : ScriptableObject
         get { return icon; }
     }
 
-    #endregion
-
-    #region Functions (public)
-
-    public virtual void Attack()
+    public int AttackPower
     {
-
+        get { return attackPower; }
     }
 
-    public virtual bool CanHarvest(ResourceDepositSO resource)
+    public int Armor
     {
-        var harvestDifficulty = resource.HarvestDifficulty;
-        switch (resource.ResourceType)
-        {
-            case ResourceType.ORE_DEPOSIT:
-                return harvestDifficulty < miningPower;
-            case ResourceType.WOOD:
-                return harvestDifficulty < axePower;
-            case ResourceType.FISH:
-                return harvestDifficulty < fishingPower;
-            default:
-                return true;
-        }
+        get { return armor; }
     }
 
-    public virtual bool InAttackRange(Vector3 currentPosition, Vector3 enemyPosition)
+    public int MinePower
     {
-        var distance = Vector3.Distance(currentPosition, enemyPosition);
-        return distance < attackRange;
+        get { return miningPower; }
     }
 
-    public virtual GameObject LoadPrefab()
+    public int AxePower
     {
-        return Instantiate(itemPrefab);
+        get { return axePower; }
+    }
+
+    public int FishingPower
+    {
+        get { return fishingPower; }
+    }
+
+    public GameObject ItemPrefab
+    {
+        get { return itemPrefab; }
     }
 
     #endregion

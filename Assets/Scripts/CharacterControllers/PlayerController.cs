@@ -5,7 +5,15 @@ using UnityEngine.AI;
 
 
 public class PlayerController : MonoBehaviour
-{ 
+{
+
+    public Transform headItemPosition;
+    public Transform bodyItemPosition;
+    public Transform leftArmItemPosition;
+    public Transform rightArmItemPosition;
+    public Transform legsItemPosition;
+
+
     private Animator anim;
     private CharacterInventory inventory;
 
@@ -14,11 +22,15 @@ public class PlayerController : MonoBehaviour
     public readonly BaseState RunState = new RunState();
     public readonly BaseState SprintState = new SprintState();
     public readonly BaseState IdleState = new IdleState();
+    public readonly BaseState MineState = new MineState();
+
     private BaseState currentState;
 
     private Vector3 lastPosition;       
-
     private CharacterController charController;
+
+    public PlayerEquipment equipment = new PlayerEquipment();
+    public PlayerStatSystem statSystem;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +43,9 @@ public class PlayerController : MonoBehaviour
 
         currentState = IdleState;
         lastPosition = transform.position;
+
+        equipment.ItemEquipedEvent += HandleEquipItem;
+        equipment.ItemUnequipedEvent += HandleUnequipItem;
     }
 
 
@@ -66,7 +81,7 @@ public class PlayerController : MonoBehaviour
 
     void StopAllActions()
     {
-        currentState = IdleState;
+        TransitionToState(IdleState);
     }
 
     public bool AddToInventory(ItemSO item)
@@ -97,175 +112,112 @@ public class PlayerController : MonoBehaviour
         return inventory.IsInventoryFull();
     }
 
+    public void StartMining()
+    {
+        StopMoving();
+        anim.SetBool("Mining", true);
+    }
+
+    public void StopMining()
+    {
+        anim.SetBool("Mining", false);
+    }
+
     public List<ItemSO> GetItems()
     {
         return inventory.GetItems();
     }
 
+    private void HandleEquipItem(ItemSO item)
+    {
+        StopAllActions();
+        var itemPrefab = Instantiate(item.ItemPrefab);
+        var itemPickUp = itemPrefab.GetComponent<PickUpItem>();
+        var rigidBody = itemPrefab.GetComponent<Rigidbody>();
 
-    #region Old Commented Code
+        inventory.RemoveItem(item);
 
-    // -------- UPDATE -------
-    //if (agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance <= 0.1f)
-    //{
-    //    agent.SetDestination(transform.position);
-    //    anim.SetFloat("MovementSpeed", 0);
-    //    if (gameObject != null)
-    //    {
-    //        if (gameObject.tag == "MineableOre")
-    //        {
-    //            if (handledTool?.tag == "Pickaxe")
-    //            {
-    //                anim.SetBool("Mining", true);
-    //            }                    
-    //        }
-    //        else if (gameObject.tag == "Pickaxe")
-    //        {
-    //            GrabTool(gameObject);
-    //        }
-    //        gameObject = null;
-    //    }            
-    //}
-    //else
-    //{
-    //    float speed = 0f;
-    //    speed = Vector3.Project(agent.desiredVelocity, transform.forward).magnitude;
-    //    anim.SetFloat("MovementSpeed", speed);
-    //}
+        if (itemPickUp == null)
+        {
+            Debug.LogWarning("Equiped non-pickable item: " + item.ItemName);
+        }
+        else
+        {
+            Destroy(itemPickUp);
+        }
 
-    //var currentMoveSpeed = agent.velocity.sqrMagnitude;
-    //anim.SetFloat("MovementSpeed", currentMoveSpeed);
+        if (rigidBody == null)
+        {
+            Debug.LogWarning("Something wrong with item prefab: all items must contain rigidbody component");
+        }
+        else
+        {
+            rigidBody.isKinematic = true;
+        }
 
-    //if (agent.pathStatus == NavMeshPathStatus.PathComplete)
-    //{
-    //    if (gameObject != null)
-    //    {
-    //        if (gameObject.tag == "MineableOre")
-    //        {
-    //            if (handledTool?.tag == "Pickaxe")
-    //            {
-    //                anim.SetBool("Mining", true);
-    //            }
-    //        }
-    //        else if (gameObject.tag == "Pickaxe")
-    //        {
-    //            GrabTool(gameObject);
-    //        }
-    //        gameObject = null;
-    //    }
-    //}
+        var itemPosition = item.ItemPosition;
 
+        switch (itemPosition)
+        {
+            case ItemPositions.BODY:
+                itemPrefab.transform.parent = bodyItemPosition;
+                 break;
+            case ItemPositions.HEAD:
+                itemPrefab.transform.parent = headItemPosition;
+                break;
+            case ItemPositions.LEGS:
+                itemPrefab.transform.parent = legsItemPosition;
+                break;
+            case ItemPositions.LEFT_HAND:
+                itemPrefab.transform.parent = leftArmItemPosition;
+                break;
+            case ItemPositions.BOTH_HANDS:
+                itemPrefab.transform.parent = leftArmItemPosition;
+                break;
+            default:
+                itemPrefab.transform.parent = rightArmItemPosition;
+                break;
+        }
 
-    //if (Input.GetKeyDown(KeyCode.Alpha1))
-    //{
-    //    if (handledTool != null && backTool == null)
-    //    {
-    //        handledTool.transform.parent = null;
-    //        GrabTool(handledTool);
-    //        handledTool = null;
-    //    } else if (backTool != null && handledTool == null)
-    //    {
-    //        backTool.transform.parent = null;
-    //        EquipTool(backTool);
-    //        backTool = null;
-    //    }
-    //}
+        itemPrefab.transform.localPosition = Vector3.zero;
+        itemPrefab.transform.localRotation = Quaternion.identity;
+    }
 
-    //var hInp = Input.GetAxis("Vertical");
-    //var vInp = Input.GetAxis("Horizontal");
-    //var userInput = new Vector3(vInp, 0, hInp);
+    private void HandleUnequipItem(ItemSO item)
+    {
+        StopAllActions();
+        if (!inventory.AddToInventory(item)) { return; }
+        Transform equipedItemTransform;
+        var itemPosition = item.ItemPosition;
+        switch (itemPosition)
+        {
+            case ItemPositions.BODY:
+                equipedItemTransform = bodyItemPosition.GetChild(0);
+                bodyItemPosition.DetachChildren();
+                break;
+            case ItemPositions.HEAD:
+                equipedItemTransform = headItemPosition.GetChild(0);
+                headItemPosition.DetachChildren();
+                break;
+            case ItemPositions.LEGS:
+                equipedItemTransform = legsItemPosition.GetChild(0);
+                legsItemPosition.DetachChildren();
+                break;
+            case ItemPositions.LEFT_HAND:
+                equipedItemTransform = leftArmItemPosition.GetChild(0);
+                leftArmItemPosition.DetachChildren();
+                break;
+            case ItemPositions.BOTH_HANDS:
+                equipedItemTransform = leftArmItemPosition.GetChild(0);
+                leftArmItemPosition.DetachChildren();
+                rightArmItemPosition.DetachChildren();
+                break;
+            default:
+                equipedItemTransform = rightArmItemPosition.GetChild(0);
+                rightArmItemPosition.DetachChildren();
+                break;
+        }
 
-    //if (userInput != Vector3.zero)
-    //{
-    //    isSprinting = Input.GetKeyDown(KeyCode.LeftShift);
-    //    var cameraForward = Camera.main.transform.forward;
-    //    cameraForward.y = 0;
-
-    //    var cameraRelativeRotation = Quaternion.FromToRotation(Vector3.forward, cameraForward);
-    //    var lookForward = cameraRelativeRotation * userInput;
-
-    //    var lookRay = new Ray(transform.position, lookForward);
-    //    transform.LookAt(lookRay.GetPoint(1));
-
-    //    if (isSprinting)
-    //    {
-    //        userInput *= 1.5f;
-    //    }
-
-    //    charController.Move(userInput / 13);
-    //    anim.SetFloat("MovementSpeed", userInput.sqrMagnitude + 2);
-    //} else
-    //{
-    //    charController.Move(Vector3.zero);
-    //    anim.SetFloat("MovementSpeed", 0);
-    //}
-    // -------- END UPDATE -------
-
-
-
-    //private void onClick(ClickData clickData)
-    //{
-    //    if (clickData.clickedLMB)
-    //    {
-    //        StopAllActions();
-    //        var numOfClicks = clickData.numOfClicks;
-    //        var location = clickData.clickArea;
-    //        gameObject = clickData.clickedObject;
-    //        agent.destination = location;
-    //        var speed = 0f;
-
-    //        if (numOfClicks == 1)
-    //        {
-    //            speed = walkMoveSpeed;
-    //        }
-    //        else
-    //        {
-    //            speed = runMoveSpeed;
-    //        }
-
-    //        agent.speed = speed;
-    //        anim.SetFloat("MovementSpeed", speed);
-    //    }
-    //    else
-    //    {
-    //        handledTool.transform.parent = null;
-    //        var rigidBodyComponent = handledTool.GetComponent<Rigidbody>();
-    //        rigidBodyComponent.isKinematic = false;
-    //        //var currentPos = handledTool.transform.position;
-    //        //handledTool.transform.position = new Vector3(currentPos.x, 0.566f, currentPos.z);
-    //        handledTool = null;
-    //    }        
-    //}
-
-    //void GrabTool(GameObject tool)
-    //{
-    //    Debug.Log("Grab tool");
-    //    if (backTool == null)
-    //    {
-    //        Debug.Log("Grabbing");
-    //        tool.transform.parent = backToolPosition;
-    //        tool.transform.position = backToolPosition.position;
-    //        var rigidBodyComponent = tool.GetComponent<Rigidbody>();
-    //        rigidBodyComponent.isKinematic = true;
-
-    //        tool.transform.rotation = backToolPosition.rotation;
-    //        tool.transform.Rotate(50, 0, 0);
-    //    }
-
-    //}
-
-    //void EquipTool(GameObject tool)
-    //{
-    //    tool.transform.parent = toolPosition;
-    //    tool.transform.position = toolPosition.position;
-    //    var rigidBodyComponent = tool.GetComponent<Rigidbody>();
-    //    rigidBodyComponent.isKinematic = true;
-
-    //    tool.transform.rotation = toolPosition.rotation;
-    //    tool.transform.Rotate(180, 0, 0);
-
-    //    handledTool = tool;
-    //}
-
-    #endregion
+        Destroy(equipedItemTransform.gameObject);
+    }
 }

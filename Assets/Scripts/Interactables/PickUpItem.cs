@@ -2,16 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(ItemSO))]
 public class PickUpItem : MonoBehaviour
 {
-    private ItemSO item;
+    public ItemSO item;
     private bool interactable = false;
-
-    private void Awake()
-    {
-        item = GetComponent<ItemSO>();
-    }
 
     private void Update()
     {
@@ -22,6 +16,7 @@ public class PickUpItem : MonoBehaviour
                 if (GameManager.Instance.currentScene.player.AddToInventory(item))
                 {
                     GameManager.Instance.currentScene.ShowInteractKeyHint(false);
+                    GameManager.Instance.currentScene.UpdateInventory();
                     Destroy(gameObject);
                 }
                 else

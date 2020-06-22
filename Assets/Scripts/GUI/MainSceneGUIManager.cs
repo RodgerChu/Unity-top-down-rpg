@@ -30,11 +30,6 @@ public class MainSceneGUIManager : MonoBehaviour
 
     public void UpdateInventory()
     {
-        inventoryGUI.UodateGUI();
-    }
-
-    public void UpdateInventoryVisibility()
-    {
-
+        inventoryGUI.UpdateGUI();
     }
 }
