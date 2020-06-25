@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public Transform rightArmItemPosition;
     public Transform legsItemPosition;
 
-
+    
     private Animator anim;
     private CharacterInventory inventory;
 
@@ -219,5 +219,13 @@ public class PlayerController : MonoBehaviour
         }
 
         Destroy(equipedItemTransform.gameObject);
+    }
+
+    public void TranslateTo(Vector3 position)
+    {
+        var charComponent = GetComponent<CharacterController>();
+        charComponent.enabled = false;
+        gameObject.transform.position = position;
+        charComponent.enabled = true;
     }
 }

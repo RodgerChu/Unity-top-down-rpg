@@ -9,6 +9,7 @@ public class MainSceneGUIManager : MonoBehaviour
     public GameObject pickUpHint;
     public GameObject inventoryFullMessage;
     public InventoryGUI inventoryGUI;
+    
 
     private void Awake()
     {

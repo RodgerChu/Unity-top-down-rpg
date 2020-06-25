@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class MainSceneManager: MonoBehaviour
 {
@@ -20,10 +21,5 @@ public class MainSceneManager: MonoBehaviour
     public void UpdateInventory()
     {
         guiManager.UpdateInventory();
-    }
-
-    public void UpdateInventoryVisibility()
-    {
-
     }
 }

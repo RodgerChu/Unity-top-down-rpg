@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffea483de273f4e92af6b508fbf0d176, type: 3}
   m_Name: RockResouce
   m_EditorClassIdentifier: 
-  harvestDifficulty: 0
+  harvestDifficulty: 50
   resourceType: 0

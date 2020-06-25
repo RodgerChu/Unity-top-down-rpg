@@ -10,6 +10,5 @@ public class CharacterCameraHelper : MonoBehaviour
     void Update()
     {
         transform.position = setTo.position;
-        setTo.transform.position = Vector3.zero;
     }
 }
