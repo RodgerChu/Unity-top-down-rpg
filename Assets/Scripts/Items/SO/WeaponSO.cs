@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "Weapon Params", menuName = "SO/Weapon", order = 1)]
-public class NewBehaviourScript : ItemSO
+public class NewBehaviourScript : EquipableItemSO
 {
 
 }

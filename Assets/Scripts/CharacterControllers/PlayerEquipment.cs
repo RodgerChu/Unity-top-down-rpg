@@ -3,16 +3,16 @@
 
 public class PlayerEquipment
 {
-    private ItemSO headItem;
-    private ItemSO bodyItem;
-    private ItemSO leftArmItem;
-    private ItemSO rightArmItem;
-    private ItemSO legsItem;
+    private EquipableItemSO headItem;
+    private EquipableItemSO bodyItem;
+    private EquipableItemSO leftArmItem;
+    private EquipableItemSO rightArmItem;
+    private EquipableItemSO legsItem;
 
-    public Action<ItemSO> ItemEquipedEvent;
-    public Action<ItemSO> ItemUnequipedEvent;
+    public Action<EquipableItemSO> ItemEquipedEvent;
+    public Action<EquipableItemSO> ItemUnequipedEvent;
 
-    public ItemSO GetEquipedItemAt(ItemPositions itemPosition)
+    public EquipableItemSO GetEquipedItemAt(ItemPositions itemPosition)
     {
         switch (itemPosition)
         {
@@ -34,7 +34,7 @@ public class PlayerEquipment
         return GetEquipedItemAt(itemPosition) != null;
     }
 
-    public void EquipItem(ItemSO item)
+    public void EquipItem(EquipableItemSO item)
     {
         switch (item.ItemPosition)
         {
@@ -64,7 +64,7 @@ public class PlayerEquipment
 
     public void UnequipItemAt(ItemPositions itemPosition)
     {
-        ItemSO unequipedItem;
+        EquipableItemSO unequipedItem;
         switch (itemPosition)
         {
             case ItemPositions.BODY:

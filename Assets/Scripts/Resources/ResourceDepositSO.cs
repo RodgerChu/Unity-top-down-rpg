@@ -7,8 +7,8 @@ public class ResourceDepositSO: ScriptableObject
 {
     #region Variables(Deposit)
 
-    [SerializeField] private int harvestDifficulty;
-    [SerializeField] private ResourceType resourceType;
+    [SerializeField] private int harvestDifficulty;    
+    [SerializeField] private ResourceSO resource;
 
     #endregion
 
@@ -22,7 +22,12 @@ public class ResourceDepositSO: ScriptableObject
 
     public ResourceType ResourceType
     {
-        get { return resourceType; }
+        get { return resource.resourceType; }
+    }
+
+    public ResourceSO Resource
+    {
+        get { return resource; }
     }
 
     #endregion

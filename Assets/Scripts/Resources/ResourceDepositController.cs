@@ -2,61 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourceDepositController : MonoBehaviour
+public class ResourceDepositController : Interactable
 {
     public ResourceDepositSO resourceInfo;
-    public string playerTag;
-
-    private bool canInteract = false;
 
 
-    private void Update()
+    protected override void OnInteract()
     {
-        if (canInteract)
+        var resourceType = resourceInfo.ResourceType;
+        var player = GameManager.Instance.currentScene.player;
+        var equipedItem = player.equipment.GetEquipedItemAt(ItemPositions.LEFT_HAND);
+        if (equipedItem == null) { return; }
+
+        switch (resourceType)
         {
-            if (Input.GetButtonDown("Interact"))
-            {
-                var resourceType = resourceInfo.ResourceType;
-                var player = GameManager.Instance.currentScene.player;
-                var equipedItem = player.equipment.GetEquipedItemAt(ItemPositions.LEFT_HAND);
-                if (equipedItem == null) { return; }
-                switch (resourceType)
+            case ResourceType.FARM:
+                break;
+            case ResourceType.ORE_DEPOSIT:
+                if (equipedItem.Subtype == ItemSubtype.PICKAXE)
                 {
-                    case ResourceType.FARM:
-                        break;
-                    case ResourceType.ORE_DEPOSIT:
-                        if (equipedItem.Subtype == ItemSubtype.PICKAXE)
-                        {
-                            player.TransitionToState(player.MineState);
-                            GameManager.Instance.currentScene.ShowInteractKeyHint(false);
-                        }
-                        break;
-                    default:
-                        Debug.LogWarning("Unknown type of resources");
-                        break;
+                    var position = new Vector3(transform.position.x, 0, transform.position.z);
+                    
+                    player.StartMiningResource(resourceInfo.Resource, position);
+                    interactable = false;
+                    GameManager.Instance.currentScene.ShowInteractKeyHint(false, null);
                 }
-            }
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        var gameObject = other.gameObject;
-        if (gameObject.tag == playerTag)
-        {
-            GameManager.Instance.currentScene.ShowInteractKeyHint(true);
-            canInteract = true;
-        }
-        
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        var gameObject = other.gameObject;
-        if (gameObject.tag == playerTag)
-        {
-            GameManager.Instance.currentScene.ShowInteractKeyHint(false);
-            canInteract = false;
+                break;
+            default:
+                Debug.LogWarning("Unknown type of resources");
+                break;
         }
     }
 }

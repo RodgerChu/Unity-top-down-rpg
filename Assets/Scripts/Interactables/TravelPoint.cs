@@ -2,20 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TravelPoint : MonoBehaviour
+public class TravelPoint : Interactable
 {
     public Transform destination;
     public Animator animator;
     public FadeTransitionObserver fadeTransitionObserver;
-    public PlayerController player;
     
-
-    private bool interactable = false;
-
-    private void Start()
-    {
-        
-    }
 
 
     private void Update()
@@ -24,28 +16,15 @@ public class TravelPoint : MonoBehaviour
         {
             animator.SetTrigger("Fade");
             fadeTransitionObserver.OnFadeIn += onFadeInComplete;
-            GameManager.Instance.currentScene.ShowInteractKeyHint(false);
+            GameManager.Instance.currentScene.ShowInteractKeyHint(false, transform);
         }
     }
 
-
-    private void OnTriggerEnter(Collider other)
+    protected override void OnInteract()
     {
-        var gameObject = other.gameObject;
-        if (gameObject.CompareTag(player.gameObject.tag))
-        {
-            GameManager.Instance.currentScene.ShowInteractKeyHint(true);
-            interactable = true;            
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        var gameObject = other.gameObject;
-        if (gameObject.CompareTag(player.gameObject.tag))
-        {
-            GameManager.Instance.currentScene.ShowInteractKeyHint(false);
-        }
+        animator.SetTrigger("Fade");
+        fadeTransitionObserver.OnFadeIn += onFadeInComplete;
+        GameManager.Instance.currentScene.ShowInteractKeyHint(false, transform);
     }
 
 
@@ -61,5 +40,4 @@ public class TravelPoint : MonoBehaviour
     {
 
     }
-
 }

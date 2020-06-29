@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 5931673536325813060}
-  cellButton: {fileID: 7386109206724836841}
+  InventoryActionButtons: {fileID: 0}
 --- !u!1 &5779231501851577771
 GameObject:
   m_ObjectHideFlags: 0

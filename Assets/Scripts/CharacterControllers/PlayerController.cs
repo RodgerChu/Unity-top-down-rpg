@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public Transform rightArmItemPosition;
     public Transform legsItemPosition;
 
-    
+
     private Animator anim;
     private CharacterInventory inventory;
 
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
 
     private BaseState currentState;
 
-    private Vector3 lastPosition;       
+    private Vector3 lastPosition;
     private CharacterController charController;
 
     public PlayerEquipment equipment = new PlayerEquipment();
@@ -68,15 +68,25 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetFloat("MovementSpeed", 0);
         }
-        
+
     }
 
     public void TransitionToState(BaseState state)
     {
-        Debug.Log("Moved from state " + currentState.ToString()  + " to state " + state.ToString());
+        Debug.Log("Moved from state " + currentState.ToString() + " to state " + state.ToString());
         currentState.OnStateExit(this);
         currentState = state;
-        currentState.OnStateEnter(this);       
+        currentState.OnStateEnter(this);
+    }
+
+    public void StartMiningResource(ResourceSO resource, Vector3 position)
+    {
+        transform.LookAt(position);
+        TransitionToState(MineState);
+        if (MineState is MineState)
+        {
+            ((global::MineState)MineState).resourceToMine = resource;
+        }
     }
 
     void StopAllActions()
@@ -89,7 +99,7 @@ public class PlayerController : MonoBehaviour
         return inventory.AddToInventory(item);
     }
 
-    public void RemoveFromInventory(ItemSO item)
+    public void RemoveFromInventory(EquipableItemSO item)
     {
         if (inventory.RemoveItem(item))
         {
@@ -128,7 +138,7 @@ public class PlayerController : MonoBehaviour
         return inventory.GetItems();
     }
 
-    private void HandleEquipItem(ItemSO item)
+    private void HandleEquipItem(EquipableItemSO item)
     {
         StopAllActions();
         var itemPrefab = Instantiate(item.ItemPrefab);
@@ -161,7 +171,7 @@ public class PlayerController : MonoBehaviour
         {
             case ItemPositions.BODY:
                 itemPrefab.transform.parent = bodyItemPosition;
-                 break;
+                break;
             case ItemPositions.HEAD:
                 itemPrefab.transform.parent = headItemPosition;
                 break;
@@ -183,7 +193,7 @@ public class PlayerController : MonoBehaviour
         itemPrefab.transform.localRotation = Quaternion.identity;
     }
 
-    private void HandleUnequipItem(ItemSO item)
+    private void HandleUnequipItem(EquipableItemSO item)
     {
         StopAllActions();
         if (!inventory.AddToInventory(item)) { return; }
@@ -227,5 +237,15 @@ public class PlayerController : MonoBehaviour
         charComponent.enabled = false;
         gameObject.transform.position = position;
         charComponent.enabled = true;
+    }
+
+    public void StartBackgroundTask(IEnumerator courutine)
+    {
+        StartCoroutine(courutine);
+    }
+
+    public void StopBackgroundTask(IEnumerator courutine)
+    {
+        StopCoroutine(courutine);
     }
 }

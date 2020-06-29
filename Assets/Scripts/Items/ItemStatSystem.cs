@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class ItemStatSystem : MonoBehaviour
 {
-    public ItemSO itemStats;
+    public EquipableItemSO itemStats;
 }

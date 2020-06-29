@@ -31,7 +31,7 @@ public class PlayerStatSystem: MonoBehaviour
         player.equipment.ItemUnequipedEvent += HandleUnequipItem;
     }
 
-    private void HandleEquipItem(ItemSO item)
+    private void HandleEquipItem(EquipableItemSO item)
     {
         if (item.Type == ItemType.ARMOR)
         {
@@ -45,7 +45,7 @@ public class PlayerStatSystem: MonoBehaviour
         }
     }
 
-    private void HandleUnequipItem(ItemSO item)
+    private void HandleUnequipItem(EquipableItemSO item)
     {
         if (item.Type == ItemType.ARMOR)
         {

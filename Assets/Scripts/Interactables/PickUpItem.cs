@@ -2,29 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickUpItem : MonoBehaviour
+public class PickUpItem : Interactable
 {
-    public ItemSO item;
-    private bool interactable = false;
+    public EquipableItemSO item;
 
-    private void Update()
+    protected override void OnInteract()
     {
-        if (interactable)
+        if (GameManager.Instance.currentScene.player.AddToInventory(item))
         {
-            if (Input.GetKeyDown(KeyCode.F))
-            {                
-                if (GameManager.Instance.currentScene.player.AddToInventory(item))
-                {
-                    GameManager.Instance.currentScene.ShowInteractKeyHint(false);
-                    GameManager.Instance.currentScene.UpdateInventory();
-                    Destroy(gameObject);
-                }
-                else
-                {
-                    // TODO: No free space, handle it somehow?
-                }
-
-            }
+            GameManager.Instance.currentScene.ShowInteractKeyHint(false, null);
+            GameManager.Instance.currentScene.UpdateInventory();
+            Destroy(gameObject);
+        }
+        else
+        {
+            // TODO: No free space, handle it somehow?
         }
     }
 
@@ -34,7 +26,7 @@ public class PickUpItem : MonoBehaviour
         {
             interactable = true;
             var invFull = GameManager.Instance.currentScene.player.IsInventoryFull();
-            GameManager.Instance.currentScene.ShowPickUpKeyHing(true, invFull);
+            GameManager.Instance.currentScene.ShowPickUpKeyHing(true, invFull, transform);
         }
     }
 
@@ -45,7 +37,7 @@ public class PickUpItem : MonoBehaviour
             Debug.Log(GameManager.Instance);
             Debug.Log(GameManager.Instance.currentScene);
             interactable = false;
-            GameManager.Instance.currentScene.ShowPickUpKeyHing(false, false);
+            GameManager.Instance.currentScene.ShowPickUpKeyHing(false, false, null);
         }
     }
 

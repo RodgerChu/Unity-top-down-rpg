@@ -5,11 +5,14 @@ using UnityEngine;
 public class MainSceneGUIManager : MonoBehaviour
 {
     [Header("GUI elements")]
-    public GameObject interactHint;
-    public GameObject pickUpHint;
-    public GameObject inventoryFullMessage;
-    public InventoryGUI inventoryGUI;
-    
+    [SerializeField] private GameObject interactHint;
+    [SerializeField] private GameObject pickUpHint;
+    [SerializeField] private GameObject inventoryFullMessage;
+    [SerializeField] private InventoryGUI inventoryGUI;
+    [SerializeField] private HUDController hudControlelr;
+
+
+    private Transform interactableObjectPosition;
 
     private void Awake()
     {
@@ -18,19 +21,36 @@ public class MainSceneGUIManager : MonoBehaviour
         inventoryFullMessage.SetActive(false);
     }
 
-    public void SwitchInteractKeyVisibility(bool visible)
+    private void Update()
     {
-        interactHint.SetActive(visible);
+        if (interactHint.activeInHierarchy)
+        {
+            var interactablePosition = Camera.main.WorldToScreenPoint(interactableObjectPosition.position);
+            var playerPosition = GameManager.Instance.currentScene.player.transform.position;
+            var playerPositionOnScreen = Camera.main.WorldToScreenPoint(playerPosition);
+            interactHint.transform.position = (playerPositionOnScreen + interactablePosition) / 2;
+        }
     }
 
-    public void ShowPickUpKeyHing(bool show, bool inventoryFull)
+    public void SwitchInteractKeyVisibility(bool visible, Transform interactable)
     {
-        pickUpHint.SetActive(show);
+        interactableObjectPosition = interactable;
+        interactHint.SetActive(visible);        
+    }
+
+    public void ShowPickUpKeyHing(bool show, bool inventoryFull, Transform interactable)
+    {
+        SwitchInteractKeyVisibility(show, interactable);
         inventoryFullMessage.SetActive(inventoryFull);
     }
 
     public void UpdateInventory()
     {
         inventoryGUI.UpdateGUI();
+    }
+
+    public void SetAmountForResource(ResourceType resourceType, int amount)
+    {
+        hudControlelr.SetAmountForResource(resourceType, amount);
     }
 }

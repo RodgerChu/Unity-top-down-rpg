@@ -16,8 +16,35 @@ public class CharacterInventory : MonoBehaviour
 
 
     public bool AddToInventory(ItemSO item)
-    {        
-        if (!IsInventoryFull())
+    {    
+        if (item is ResourceSO)
+        {
+            for (int index = 0; index < items.Count; index++)
+            {
+                var listItem = items[index];
+                if (listItem is ResourceSO)
+                {
+                    if (((ResourceSO)listItem).resourceType == ((ResourceSO)item).resourceType)
+                    {
+                        Debug.Log("Found item in inventory with type and amount: " + ((ResourceSO)item).resourceType + " " + ((ResourceSO)listItem).amount);
+                        Debug.Log("Incrementing it with " + ((ResourceSO)item).amount);
+                        ((ResourceSO)listItem).amount += ((ResourceSO)item).amount;
+                        GameManager.Instance.currentScene.SetAmountForResource(((ResourceSO)item).resourceType, ((ResourceSO)listItem).amount);
+                        Debug.Log("Incremented resource amount: " + ((ResourceSO)listItem).amount);
+                        items[index] = listItem;
+                        return true;                        
+                    }
+                }
+            }
+
+            if (!IsInventoryFull())
+            {
+                items.Add(item);
+                GameManager.Instance.currentScene.SetAmountForResource(((ResourceSO)item).resourceType, ((ResourceSO)item).amount);                
+                return true;
+            }
+        }
+        else if (!IsInventoryFull())
         {
             items.Add(item);
             return true;
@@ -26,7 +53,7 @@ public class CharacterInventory : MonoBehaviour
         return false;
     }
 
-    public bool RemoveItem(ItemSO item)
+    public bool RemoveItem(EquipableItemSO item)
     {
         if (items.Contains(item))
         {
@@ -46,4 +73,6 @@ public class CharacterInventory : MonoBehaviour
     {
         return items;
     }
+
+
 }
